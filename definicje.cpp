@@ -6,8 +6,8 @@
 */
 
 #ifdef _DEFINICJE
-
-
+#include "Terrain.h"
+Terrain *ter = new Terrain(4, 4, 4);
 	/******************* SZABLON **************************/
 
 	// DEFINICJE ZMIENNYCH	
