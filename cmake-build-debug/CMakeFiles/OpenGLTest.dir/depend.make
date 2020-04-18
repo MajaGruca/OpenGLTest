@@ -12,6 +12,11 @@ CMakeFiles/OpenGLTest.dir/main.cpp.o: ../interakcja.cpp
 CMakeFiles/OpenGLTest.dir/main.cpp.o: ../konfiguracja.cpp
 CMakeFiles/OpenGLTest.dir/main.cpp.o: ../main.cpp
 CMakeFiles/OpenGLTest.dir/main.cpp.o: ../rysowanie.cpp
+CMakeFiles/OpenGLTest.dir/main.cpp.o: ../tekstura.h
 
 CMakeFiles/OpenGLTest.dir/rysowanie.cpp.o: ../rysowanie.cpp
+
+CMakeFiles/OpenGLTest.dir/tekstura.cpp.o: ../bmp.h
+CMakeFiles/OpenGLTest.dir/tekstura.cpp.o: ../tekstura.cpp
+CMakeFiles/OpenGLTest.dir/tekstura.cpp.o: ../tekstura.h
 

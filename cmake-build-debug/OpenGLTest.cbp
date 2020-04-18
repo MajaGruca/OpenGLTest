@@ -84,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/maj3/CLionProjects/OpenGLTest/bmp.h">
+			<Option target="OpenGLTest"/>
+		</Unit>
 		<Unit filename="/home/maj3/CLionProjects/OpenGLTest/definicje.cpp">
 			<Option target="OpenGLTest"/>
 		</Unit>
@@ -97,6 +100,12 @@
 			<Option target="OpenGLTest"/>
 		</Unit>
 		<Unit filename="/home/maj3/CLionProjects/OpenGLTest/rysowanie.cpp">
+			<Option target="OpenGLTest"/>
+		</Unit>
+		<Unit filename="/home/maj3/CLionProjects/OpenGLTest/tekstura.cpp">
+			<Option target="OpenGLTest"/>
+		</Unit>
+		<Unit filename="/home/maj3/CLionProjects/OpenGLTest/tekstura.h">
 			<Option target="OpenGLTest"/>
 		</Unit>
 		<Unit filename="/home/maj3/CLionProjects/OpenGLTest/CMakeLists.txt">

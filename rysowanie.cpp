@@ -1,18 +1,8 @@
-/*
-
- C++ przez OpenGL - szablon do cwiczen laboratoryjnych
- (C) Michal Turek.
-
-*/
-
 #ifdef _RYSOWANIE
 
-
-/******************* SZABLON **************************/
     glTranslatef(0.0,0.0,-80); // przesuniecie obiektu przed kamere
-	glRotatef(15, 1, 0, 0);
-	glRotatef(45, 0, -1, 0);
-
+	//glRotatef(15, 1, 0, 0);
+	//glRotatef(45, 0, -1, 0);
 
 	glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 	glMatrixMode(GL_MODELVIEW);
@@ -20,7 +10,6 @@
 
     glBegin(GL_QUADS);
 
-	//front
 	glTexCoord2f(3, 3);
 	glVertex3f(10.0f, 10.0f, 10.0f);
 	glTexCoord2f(0, 3);
@@ -32,10 +21,10 @@
 
 	glEnd();
 
-	//glBindTexture(GL_TEXTURE_2D, tex_green);
+	glBindTexture(GL_TEXTURE_2D, tex_blue);
 
 /*
-	// Tu (na koncu) rysowanie obiekt�w BLEND
+	// Tu (na koncu) rysowanie obiektow BLEND
 
 	glPushMatrix();
 		glEnable(GL_BLEND);
@@ -51,8 +40,6 @@
 		glDisable(GL_BLEND);
 	glPopMatrix();
 */
-	/******************************************************/
-
 
 #undef _RYSOWANIE
 #endif

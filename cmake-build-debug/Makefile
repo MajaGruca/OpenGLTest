@@ -258,6 +258,33 @@ rysowanie.cpp.s:
 	$(MAKE) -f CMakeFiles/OpenGLTest.dir/build.make CMakeFiles/OpenGLTest.dir/rysowanie.cpp.s
 .PHONY : rysowanie.cpp.s
 
+tekstura.o: tekstura.cpp.o
+
+.PHONY : tekstura.o
+
+# target to build an object file
+tekstura.cpp.o:
+	$(MAKE) -f CMakeFiles/OpenGLTest.dir/build.make CMakeFiles/OpenGLTest.dir/tekstura.cpp.o
+.PHONY : tekstura.cpp.o
+
+tekstura.i: tekstura.cpp.i
+
+.PHONY : tekstura.i
+
+# target to preprocess a source file
+tekstura.cpp.i:
+	$(MAKE) -f CMakeFiles/OpenGLTest.dir/build.make CMakeFiles/OpenGLTest.dir/tekstura.cpp.i
+.PHONY : tekstura.cpp.i
+
+tekstura.s: tekstura.cpp.s
+
+.PHONY : tekstura.s
+
+# target to generate assembly for a file
+tekstura.cpp.s:
+	$(MAKE) -f CMakeFiles/OpenGLTest.dir/build.make CMakeFiles/OpenGLTest.dir/tekstura.cpp.s
+.PHONY : tekstura.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +309,9 @@ help:
 	@echo "... rysowanie.o"
 	@echo "... rysowanie.i"
 	@echo "... rysowanie.s"
+	@echo "... tekstura.o"
+	@echo "... tekstura.i"
+	@echo "... tekstura.s"
 .PHONY : help
 
 

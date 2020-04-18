@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/maj3/CLionProjects/OpenGLTest/konfiguracja.cpp" "/home/maj3/CLionProjects/OpenGLTest/cmake-build-debug/CMakeFiles/OpenGLTest.dir/konfiguracja.cpp.o"
   "/home/maj3/CLionProjects/OpenGLTest/main.cpp" "/home/maj3/CLionProjects/OpenGLTest/cmake-build-debug/CMakeFiles/OpenGLTest.dir/main.cpp.o"
   "/home/maj3/CLionProjects/OpenGLTest/rysowanie.cpp" "/home/maj3/CLionProjects/OpenGLTest/cmake-build-debug/CMakeFiles/OpenGLTest.dir/rysowanie.cpp.o"
+  "/home/maj3/CLionProjects/OpenGLTest/tekstura.cpp" "/home/maj3/CLionProjects/OpenGLTest/cmake-build-debug/CMakeFiles/OpenGLTest.dir/tekstura.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

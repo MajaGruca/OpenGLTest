@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/OpenGLTest.dir/konfiguracja.cpp.o"
   "CMakeFiles/OpenGLTest.dir/main.cpp.o"
   "CMakeFiles/OpenGLTest.dir/rysowanie.cpp.o"
+  "CMakeFiles/OpenGLTest.dir/tekstura.cpp.o"
   "OpenGLTest"
   "OpenGLTest.pdb"
 )

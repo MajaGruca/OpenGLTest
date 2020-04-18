@@ -13,5 +13,10 @@ CMakeFiles/OpenGLTest.dir/main.cpp.o
  /home/maj3/CLionProjects/OpenGLTest/konfiguracja.cpp
  /home/maj3/CLionProjects/OpenGLTest/main.cpp
  /home/maj3/CLionProjects/OpenGLTest/rysowanie.cpp
+ /home/maj3/CLionProjects/OpenGLTest/tekstura.h
 CMakeFiles/OpenGLTest.dir/rysowanie.cpp.o
  /home/maj3/CLionProjects/OpenGLTest/rysowanie.cpp
+CMakeFiles/OpenGLTest.dir/tekstura.cpp.o
+ /home/maj3/CLionProjects/OpenGLTest/bmp.h
+ /home/maj3/CLionProjects/OpenGLTest/tekstura.cpp
+ /home/maj3/CLionProjects/OpenGLTest/tekstura.h
