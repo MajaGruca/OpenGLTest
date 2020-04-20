@@ -16,11 +16,11 @@ public:
     Terrain(int rows, int columns, int length);
     int getHeightOfPoint(int x, int y);
     void GenerateTerrain();
-    int ary[4][4] = {
-            {1,1,1,1},
-            {1,2,1,1},
-            {1,1,1,0},
-            {1,1,1,1}
+    int ary[4][8] = {
+            {1,1,1,1,2,1,1,1},
+            {1,2,1,1,1,1,1,1},
+            {1,1,1,0,1,1,0,1},
+            {1,1,1,1,1,1,0,0}
     };
 };
 

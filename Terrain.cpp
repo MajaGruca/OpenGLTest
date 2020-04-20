@@ -20,9 +20,11 @@ void Terrain::GenerateTerrain() {
         int n =0;
         for (int w=0; w<this->rows*2; w++) {
             if (w%2 == 0) {
-                float y = (float) this->getHeightOfPoint(n, h);
+                float y = (float) this->getHeightOfPoint(h, n);
                 glVertex3f((float) n, (float) y, (float) h);
-                y = (float) this->getHeightOfPoint(n, h+1);
+                std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h << "\n";
+                y = (float) this->getHeightOfPoint(h+1, n);
+                std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h + 1 << "\n";
                 glVertex3f((float) n, (float) y, (float) h + 1);
                 n++;
             }

@@ -144,6 +144,7 @@ void SzablonKlawiszKlawiaturyWcisniety (GLubyte key, int x, int y)
 
 #define _INTERAKCJA
 #include "interakcja.cpp"
+#include "Terrain.h"
 
 void windowInit()
 {
@@ -324,6 +325,7 @@ void rysujRamke(bool prawa)
 
 void rysuj()
 {
+
     switch (stereoTryb){
         case 0: // mono
             rysujRamke (false);
