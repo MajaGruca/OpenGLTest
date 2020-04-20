@@ -5,23 +5,28 @@
 #ifndef OPENGLTEST_TERRAIN_H
 #define OPENGLTEST_TERRAIN_H
 
-
+#include <string>
 #include <vector>
 
 class Terrain {
 private:
     int rows, columns, length = 0;
-
+    //ary [rows][columns] = {
+//            {1,1,1,1,2,1,1,1},
+//            {1,2,1,1,1,1,1,1},
+//            {1,1,1,0,1,1,0,1},
+//            {1,1,1,1,1,1,0,0}
+//    };
 public:
     Terrain(int rows, int columns, int length);
     int getHeightOfPoint(int x, int y);
     void GenerateTerrain();
-    int ary[4][8] = {
-            {1,1,1,1,2,1,1,1},
-            {1,2,1,1,1,1,1,1},
-            {1,1,1,0,1,1,0,1},
-            {1,1,1,1,1,1,0,0}
-    };
+    std::vector< std::vector<int> > ary;
+    void getHeightArrayFromFile(std::string nameOfFile);
+//    int ary[2][3] = {
+//            {1,1,1},
+//            {1,2,1}
+//    };
 };
 
 
