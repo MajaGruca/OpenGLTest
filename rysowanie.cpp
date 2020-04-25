@@ -1,10 +1,3 @@
-/*
-
- C++ przez OpenGL - szablon do cwiczen laboratoryjnych
- (C) Michal Turek.
-
-*/
-
 #ifdef _RYSOWANIE
 glColor3f(0.0f, 1.0f, 0.0f);
 ter->GenerateTerrain();
@@ -62,7 +55,7 @@ glPopMatrix();
         glDisable(GL_BLEND);
     glPopMatrix();
 */
-    /******************************************************/
+	/******************************************************/
 
 
 #undef _RYSOWANIE

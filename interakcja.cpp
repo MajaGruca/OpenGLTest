@@ -1,16 +1,14 @@
 /*
 
- C++ przez OpenGL - szablon do æwiczeñ laboratoryjnych
- (C) Micha³ Turek.
+ C++ przez OpenGL - szablon do ï¿½wiczeï¿½ laboratoryjnych
+ (C) Michaï¿½ Turek.
 
 */
 
 #ifdef _INTERAKCJA
-
-
 	/******************* SZABLON **************************/
 
-	// DEFINICJE FUNKCJI OBS£UGUJ¥CYCH ZDARZENIA MYSZY I KLAWIATURY	
+	// DEFINICJE FUNKCJI OBSï¿½UGUJï¿½CYCH ZDARZENIA MYSZY I KLAWIATURY	
 
 void PrzyciskMyszyWcisniety (int button, int state, int x, int y)
 {
@@ -18,7 +16,7 @@ void PrzyciskMyszyWcisniety (int button, int state, int x, int y)
 
 
 	//*************************************************************
-	// tu mo¿na umieœciæ kod obs³uguj¹cy wciœniêcie przycisku myszy
+	// tu moï¿½na umieï¿½ciï¿½ kod obsï¿½ugujï¿½cy wciï¿½niï¿½cie przycisku myszy
 
 
 
@@ -35,12 +33,7 @@ void RuchKursoraMyszy (int x, int y)
 	SzablonRuchKursoraMyszy (x, y); // wywolanie standardowej obslugi zdarzen szablonu 
 
 	//****************************************************
-	//tu mo¿na umieœciæ kod obs³uguj¹cy ruch kursora myszy
-
-	
-
-
-
+	//tu moï¿½na umieï¿½ciï¿½ kod obsï¿½ugujï¿½cy ruch kursora myszy
 
 
 }
@@ -50,7 +43,7 @@ void KlawiszKlawiaturyWcisniety (GLubyte key, int x, int y)
 	SzablonKlawiszKlawiaturyWcisniety (key, x, y);	// wywolanie standardowej obslugi zdarzen szablonu 
 	
 	//*******************************************************************************
-	// tu mo¿na umieœciæ kod obs³uguj¹cy wciœniêcie klawisza klawiatury, przyk³adowo:
+	// tu moï¿½na umieï¿½ciï¿½ kod obsï¿½ugujï¿½cy wciï¿½niï¿½cie klawisza klawiatury, przykï¿½adowo:
 	
 	switch (key) 
 	{
@@ -81,13 +74,11 @@ void KlawiszKlawiaturyWcisniety (GLubyte key, int x, int y)
 
 }
 
-
-
 void KlawiszSpecjalnyWcisniety (GLint key, int x, int y)
 {
 
 	//*******************************************************************************
-	// tu mo¿na umieœciæ kod obs³uguj¹cy wciœniêcie specjalnego klawisza klawiatury, przyk³adowo:
+	// tu moï¿½na umieï¿½ciï¿½ kod obsï¿½ugujï¿½cy wciï¿½niï¿½cie specjalnego klawisza klawiatury, przykï¿½adowo:
 	
 	switch (key) 
 	{
@@ -106,11 +97,7 @@ void KlawiszSpecjalnyWcisniety (GLint key, int x, int y)
 
 	}
 
-
-
 }
-
-
 	/******************************************************/
 
 #undef _INTERAKCJA
