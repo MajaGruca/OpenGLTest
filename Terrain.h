@@ -19,9 +19,9 @@ private:
 //    };
 public:
     Terrain(int rows, int columns, int length);
-    int getHeightOfPoint(int x, int y);
+    double getHeightOfPoint(int x, int y);
     void GenerateTerrain();
-    std::vector< std::vector<int> > ary;
+    std::vector< std::vector<double> > ary;
     void getHeightArrayFromFile(std::string nameOfFile);
 //    int ary[2][3] = {
 //            {1,1,1},

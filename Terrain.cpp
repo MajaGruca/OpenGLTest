@@ -23,10 +23,12 @@ void Terrain::GenerateTerrain() {
     for (int h=0; h<this->columns; h++) {
         glPushMatrix();
 //        glTranslatef(0.0f, 0.0f, h);
+        glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
+        glColor3f(0.0f, 1.0f, 0.0f);
         glBegin(GL_TRIANGLE_STRIP);
         int n =0;
         for (int w=0; w<this->rows*2; w=w+2) {
-            float y = (float) this->getHeightOfPoint(n, h);
+            double y = this->getHeightOfPoint(n, h);
             glVertex3f((float) n, (float) y, (float) h);
             std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h << "\n";
             y = (float) this->getHeightOfPoint(n, h+1);
@@ -39,7 +41,7 @@ void Terrain::GenerateTerrain() {
     }
 };
 
-int Terrain::getHeightOfPoint(int x, int y) {
+double Terrain::getHeightOfPoint(int x, int y) {
     return this->ary[x][y];
 }
 
@@ -47,7 +49,7 @@ int Terrain::getHeightOfPoint(int x, int y) {
 void Terrain::getHeightArrayFromFile(std::string nameOfFile) {
     std::ifstream csv(nameOfFile);
     std::string line;
-    std::vector <std::vector<int>> items;
+    std::vector <std::vector<double>> items;
 
     if (csv.is_open()) {
         cout << "Opened file";
