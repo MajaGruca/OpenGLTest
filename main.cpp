@@ -3,7 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include <iostream>
-
+#include "tekstura.cpp"
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
