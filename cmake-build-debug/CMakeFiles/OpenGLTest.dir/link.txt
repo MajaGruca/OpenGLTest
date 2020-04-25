@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/OpenGLTest.dir/main.cpp.o CMakeFiles/OpenGLTest.dir/rysowanie.cpp.o CMakeFiles/OpenGLTest.dir/definicje.cpp.o CMakeFiles/OpenGLTest.dir/interakcja.cpp.o CMakeFiles/OpenGLTest.dir/konfiguracja.cpp.o  -o OpenGLTest  -lglut -lGL -lGLU 
