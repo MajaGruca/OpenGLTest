@@ -3,6 +3,20 @@ glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 glMatrixMode(GL_MODELVIEW);
 glBindTexture(GL_TEXTURE_2D, snow_texture);
 ter->GenerateTerrain();
+glPushMatrix();
+        glEnable(GL_BLEND);
+        glDepthMask(GL_FALSE);
+        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+        GLfloat  mat1[4] = {0.5,0.4,0.7,1};
+        glMaterialfv(GL_FRONT, GL_SPECULAR,mat1);
+        glMaterialfv(GL_FRONT, GL_AMBIENT,mat1);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE,mat1);
+        glTranslatef(105,-6.7,-103);
+        rysujModel("skilift");
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
+    glPopMatrix();
+
 /*
 
 
@@ -77,6 +91,8 @@ glPopMatrix();
 */
 	/******************************************************/
 
+=========
+>>>>>>>>> Temporary merge branch 2
 
 #undef _RYSOWANIE
 #endif
