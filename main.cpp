@@ -9,7 +9,7 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 #include <unistd.h>
-
+#include "tekstura.cpp"
 //#define GLUTCHECKLOOP
 
 // Wymiary okna
@@ -256,29 +256,32 @@ void aktywujSpecjalneRenderowanieModelu(char * file_name, int spec_id = 0)
 
 void ladujModele()
 {
-
-    WIN32_FIND_DATA *fd;
-    HANDLE fh;
+//
+//    WIN32_FIND_DATA *fd;
+//    HANDLE fh;
     model3DS * model_tmp;
-    char directory[_MAX_PATH];
-    if( getcwd( directory, _MAX_PATH ) == NULL ) return;
-    strcat (directory,"\\data\\*.3ds");
-
-    fd = (WIN32_FIND_DATA *)malloc(sizeof(WIN32_FIND_DATA));
-    fh = FindFirstFile((LPCSTR) directory,fd);
-    if(fh != INVALID_HANDLE_VALUE)
-        do {
-            if(fd->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY){	// katalogi ignorujemy
-                if (FindNextFile(fh,fd)) continue; else break;
-            }
-            // ladowanie obiektu i dodanie do kontenera
-            char filename[_MAX_PATH];
-            strcpy (filename,"data\\");
-            strcat (filename,fd->cFileName);
-            model_tmp = new model3DS (filename,1,stereoTryb == 2);
-            dodajModel (model_tmp,fd->cFileName);
-            printf("[3DS] Model '%s' stored\n",fd->cFileName);
-        } while(FindNextFile(fh,fd));
+//    char directory[_MAX_PATH];
+//    if( getcwd( directory, _MAX_PATH ) == NULL ) return;
+//    strcat (directory,"\\data\\*.3ds");
+//
+//    fd = (WIN32_FIND_DATA *)malloc(sizeof(WIN32_FIND_DATA));
+//    fh = FindFirstFile((LPCSTR) directory,fd);
+//    if(fh != INVALID_HANDLE_VALUE)
+//        do {
+//            if(fd->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY){	// katalogi ignorujemy
+//                if (FindNextFile(fh,fd)) continue; else break;
+//            }
+//            // ladowanie obiektu i dodanie do kontenera
+//            char filename[_MAX_PATH];
+//            strcpy (filename,"data\\");
+//            strcat (filename,fd->cFileName);
+            char filename[300];
+            char name[30];
+            strcpy(filename, "/home/olga/Documents/OpenGLTest/skilift.3ds");
+            model_tmp = new model3DS(filename,1,stereoTryb == 2);
+            dodajModel(model_tmp, strcpy(name, "skilift"));
+//            printf("[3DS] Model '%s' stored\n",fd->cFileName);
+//        } while(FindNextFile(fh,fd));
 }
 
 /**********************************************************
