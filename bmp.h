@@ -6,11 +6,15 @@
 #define OPENGLTEST_BMP_H
 
 #include <stdint.h>
+#include "windowsVal.h"
 
 typedef uint8_t  BYTE;
 typedef uint32_t DWORD;
 typedef int32_t  LONG;
 typedef uint16_t WORD;
+typedef int HANDLE;
+typedef const char* LPCSTR;
+typedef char TCHAR;
 
 #pragma pack(push,2)
 typedef struct tagBITMAPFILEHEADER {
@@ -44,6 +48,24 @@ typedef struct tagRGBTRIPLE {
 } RGBTRIPLE,*LPRGBTRIPLE;
 
 #pragma pack(pop)
+
+typedef struct _FILETIME { // ft
+    DWORD dwLowDateTime;
+    DWORD dwHighDateTime;
+} FILETIME;
+
+typedef struct _WIN32_FIND_DATA { // wfd
+    DWORD dwFileAttributes;
+    FILETIME ftCreationTime;
+    FILETIME ftLastAccessTime;
+    FILETIME ftLastWriteTime;
+    DWORD    nFileSizeHigh;
+    DWORD    nFileSizeLow;
+    DWORD    dwReserved0;
+    DWORD    dwReserved1;
+    TCHAR    cFileName[ MAX_PATH ];
+    TCHAR    cAlternateFileName[ 14 ];
+} WIN32_FIND_DATA;
 
 #endif //OPENGLTEST_BMP_H
 

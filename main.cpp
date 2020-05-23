@@ -3,10 +3,12 @@
 #include <ctime>
 #include <cmath>
 #include <iostream>
-#include "tekstura.cpp"
+#include "model3DS.h"
+#include "tekstura.h"
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
+#include <unistd.h>
 
 //#define GLUTCHECKLOOP
 
@@ -199,6 +201,86 @@ void rozmiarPrawe (int width, int height)
     rozmiar (width, height);
 }
 
+/** ZARZADANIE SKLADEM MODELI 3DS **/
+
+struct model_w_skladzie {
+    char * filename;
+    model3DS * model;
+    struct model_w_skladzie *wsk;
+};
+struct model_w_skladzie* sklad_modeli = NULL;
+
+void dodajModel (model3DS * _model, char* file_name)
+{
+    struct model_w_skladzie* tmp;
+    tmp = (struct model_w_skladzie *) malloc (sizeof(struct model_w_skladzie));
+    tmp -> filename  = (char *) malloc(strlen(file_name)+1);
+    strcpy( tmp -> filename, file_name);
+    tmp -> model = _model;
+    tmp->wsk = sklad_modeli;
+    sklad_modeli = tmp;
+}
+
+model3DS * pobierzModel (char* file_name)
+{
+    struct model_w_skladzie* sklad_tmp = sklad_modeli;
+    while (sklad_tmp){
+        if (!strcmp(sklad_tmp->filename,file_name)) return sklad_tmp->model;
+        char file_name_full[_MAX_PATH];
+        strcpy (file_name_full,file_name);
+        strcat (file_name_full,".3ds");
+        if (!strcmp(sklad_tmp->filename,file_name_full)) return sklad_tmp->model;
+
+        sklad_tmp = sklad_tmp->wsk;
+    }
+    return NULL;
+}
+
+void rysujModel(char * file_name, int tex_num = -1 )
+{
+    model3DS * model_tmp;
+    if (model_tmp = pobierzModel (file_name))
+        if (tex_num == -1)
+            model_tmp -> draw();
+        else
+            model_tmp -> draw(tex_num, false);
+
+}
+
+void aktywujSpecjalneRenderowanieModelu(char * file_name, int spec_id = 0)
+{
+    model3DS * model_tmp;
+    if (model_tmp = pobierzModel (file_name))
+        model_tmp->setSpecialTransform(spec_id);
+}
+
+void ladujModele()
+{
+
+    WIN32_FIND_DATA *fd;
+    HANDLE fh;
+    model3DS * model_tmp;
+    char directory[_MAX_PATH];
+    if( getcwd( directory, _MAX_PATH ) == NULL ) return;
+    strcat (directory,"\\data\\*.3ds");
+
+    fd = (WIN32_FIND_DATA *)malloc(sizeof(WIN32_FIND_DATA));
+    fh = FindFirstFile((LPCSTR) directory,fd);
+    if(fh != INVALID_HANDLE_VALUE)
+        do {
+            if(fd->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY){	// katalogi ignorujemy
+                if (FindNextFile(fh,fd)) continue; else break;
+            }
+            // ladowanie obiektu i dodanie do kontenera
+            char filename[_MAX_PATH];
+            strcpy (filename,"data\\");
+            strcat (filename,fd->cFileName);
+            model_tmp = new model3DS (filename,1,stereoTryb == 2);
+            dodajModel (model_tmp,fd->cFileName);
+            printf("[3DS] Model '%s' stored\n",fd->cFileName);
+        } while(FindNextFile(fh,fd));
+}
+
 /**********************************************************
  		RYSOWANIE TRESCI RAMKI
  *********************************************************/
@@ -346,14 +428,17 @@ int main(int argc, char **argv)
     //ladujModele();
     //aktywujSpecjalneRenderowanieModelu("woda",1);
     //aktywujSpecjalneRenderowanieModelu("most",2);
-    ter->getHeightArrayFromFile("/home/olga/Documents/OpenGLTest/c.csv");
+    ter->getHeightArrayFromFile("../c.csv");
     if (oknoFullScreen && stereoTryb != 2) glutFullScreen();
 
     //ładowanie tekstur
     glEnable(GL_TEXTURE_2D);
     const char *path = "../tekstury/RubikTileBlue.bmp";
+    const char *path2 = "../tekstury/Snow.bmp";
     tex_blue = WczytajTeksture(path);
-    if(tex_blue == -1) {
+    snow_texture = WczytajTeksture(path2);
+
+    if(tex_blue == -1 || snow_texture == -1) {
         std::cout << "Błąd wczytywania ";
         exit(0);
     }
