@@ -6,12 +6,15 @@
 #include <iostream>
 #include <fstream>
 #include "Terrain.h"
-#include <boost/algorithm/string.hpp>
-#include <algorithm>
-#include <cstdlib>
+//#include <boost/algorithm/string.hpp>
+//#include <algorithm>
+//#include <cstdlib>
 #include <vector>
+#include <sstream>
 
 using namespace std;
+
+int x1 = 0, y1=0;
 
 Terrain::Terrain(int rows, int columns, int length) {
     this->rows = rows;
@@ -29,10 +32,16 @@ void Terrain::GenerateTerrain() {
         int n =0;
         for (int w=0; w<this->rows*2; w=w+2) {
             double y = this->getHeightOfPoint(n, h);
+            glTexCoord2f(x1, 0);
             glVertex3f((float) n, (float) y, (float) h);
             std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h << "\n";
             y = (float) this->getHeightOfPoint(n, h+1);
             std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h + 1 << "\n";
+            glTexCoord2f(x1, 1);
+            if(x1==0)
+                x1=1;
+            else
+                x1=0;
             glVertex3f((float) n, (float) y, (float) h + 1);
             n++;
         }

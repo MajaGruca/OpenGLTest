@@ -354,14 +354,17 @@ int main(int argc, char **argv)
     //ladujModele();
     //aktywujSpecjalneRenderowanieModelu("woda",1);
     //aktywujSpecjalneRenderowanieModelu("most",2);
-    ter->getHeightArrayFromFile("/home/olga/Documents/OpenGLTest/c.csv");
+    ter->getHeightArrayFromFile("../c.csv");
     if (oknoFullScreen && stereoTryb != 2) glutFullScreen();
 
     //ładowanie tekstur
     glEnable(GL_TEXTURE_2D);
     const char *path = "../tekstury/RubikTileBlue.bmp";
+    const char *path2 = "../tekstury/Snow.bmp";
     tex_blue = WczytajTeksture(path);
-    if(tex_blue == -1) {
+    snow_texture = WczytajTeksture(path2);
+
+    if(tex_blue == -1 || snow_texture == -1) {
         std::cout << "Błąd wczytywania ";
         exit(0);
     }

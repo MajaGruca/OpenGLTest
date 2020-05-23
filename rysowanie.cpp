@@ -1,6 +1,26 @@
 #ifdef _RYSOWANIE
-glColor3f(0.0f, 1.0f, 0.0f);
+glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
+glMatrixMode(GL_MODELVIEW);
+glBindTexture(GL_TEXTURE_2D, snow_texture);
 ter->GenerateTerrain();
+/*
+
+
+    glBegin(GL_QUADS);
+    int texTiles = 3;   // zmiana wartości 3 na inną sprawia że tekstura jest bardziej lub mniej rozciągnięta
+	glTexCoord2f(texTiles, texTiles);
+	glVertex3f(10.0f, 10.0f, 10.0f);
+	glTexCoord2f(0, texTiles);
+	glVertex3f(-10.0f, 10.0f, 10.0f);
+	glTexCoord2f(0, 0);
+	glVertex3f(-10.0f, -10.0f, 10.0f);
+	glTexCoord2f(texTiles, 0);
+	glVertex3f(10.0f, -10.0f, 10.0f);
+
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, tex_blue);
+*/
 /******************* SZABLON **************************/
 //glPushMatrix();
 //    glBegin(GL_TRIANGLE_STRIP);
