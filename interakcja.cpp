@@ -20,6 +20,12 @@ void PrzyciskMyszyWcisniety (int button, int state, int x, int y)
 
 
 
+
+
+
+
+
+
 }
 
 void RuchKursoraMyszy (int x, int y)

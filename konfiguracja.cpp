@@ -22,7 +22,10 @@
 	//rejestrujPrzeszkode(-101,-90,-26,200);		// lewa wyspa
 	//rejestrujPrzeszkode(13,-200,90,132);		// prawa wyspa
 
+
+
 	/******************************************************/
+
 
 #undef _KONFIGURACJA
 #endif

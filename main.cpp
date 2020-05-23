@@ -3,7 +3,7 @@
 #include <ctime>
 #include <cmath>
 #include <iostream>
-
+#include "tekstura.cpp"
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
@@ -37,7 +37,6 @@ double kameraKat;				// kat patrzenia
 double kameraPredkoscObrotu;
 #define MIN_DYSTANS 0.5			// minimalny dystans od brzegu obszaru ograniczenia kamery
 double obszarKamery = 0;
-
 #define _DEFINICJE
 #include "definicje.cpp"
 
@@ -147,6 +146,7 @@ void SzablonKlawiszKlawiaturyWcisniety (GLubyte key, int x, int y)
 #define _INTERAKCJA
 #include "interakcja.cpp"
 #include "tekstura.h"
+#include "Terrain.h"
 
 void windowInit()
 {
@@ -158,7 +158,6 @@ void windowInit()
     glEnable(GL_LIGHTING);
     GLfloat  ambient[4] = {0.3,0.3,0.3,1};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT,ambient);
-
     GLfloat  diffuse[4] = {0.9,0.9,0.9,1};
     GLfloat  specular[4] = {0.9,0.9,0.9,1};
     GLfloat	 position[4] = {30,30,-30,1};
@@ -170,13 +169,6 @@ void windowInit()
 
     /*******************MGLA**************************/
 
-    float fogColor[4]= {0.8f, 0.8f, 0.8f, 0.1f};
-    glFogi(GL_FOG_MODE,GL_EXP2); // [GL_EXP, GL_EXP2, GL_LINEAR ]
-    glFogfv(GL_FOG_COLOR, fogColor);
-    glFogf(GL_FOG_DENSITY, 0.005f);
-    glFogf(GL_FOG_START, 20.0f);
-    glFogf(GL_FOG_END, 200.0f);
-    glEnable(GL_FOG);
 }
 
 void rozmiar (int width, int height)
@@ -245,6 +237,7 @@ void rysujRamke(bool prawa)
 
 void rysuj()
 {
+
     switch (stereoTryb){
         case 0: // mono
             rysujRamke (false);
@@ -350,6 +343,10 @@ int main(int argc, char **argv)
         glutTimerFunc(10,syncTimer,10);
     resetKamery();
     //srand( (unsigned)time( NULL ) ); // generator liczb losowych
+    //ladujModele();
+    //aktywujSpecjalneRenderowanieModelu("woda",1);
+    //aktywujSpecjalneRenderowanieModelu("most",2);
+    ter->getHeightArrayFromFile("/home/olga/Documents/OpenGLTest/c.csv");
     if (oknoFullScreen && stereoTryb != 2) glutFullScreen();
 
     //ładowanie tekstur

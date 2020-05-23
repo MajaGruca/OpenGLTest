@@ -3,6 +3,6 @@ project(OpenGLTest)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(OpenGLTest main.cpp rysowanie.cpp definicje.cpp interakcja.cpp konfiguracja.cpp tekstura.cpp tekstura.h bmp.h)
+add_executable(OpenGLTest main.cpp rysowanie.cpp definicje.cpp interakcja.cpp konfiguracja.cpp Terrain.cpp Terrain.h)
 
 target_link_libraries(OpenGLTest -lglut -lGL -lGLU)
