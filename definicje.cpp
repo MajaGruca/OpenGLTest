@@ -22,7 +22,7 @@ Terrain *ter = new Terrain(13, 6, 2);
 
 	int tex_blue = 0;
 	int snow_texture = 0;
-
+    int skilift_texture = 0;
 	int animacjaLisci = 0;
 	float posx= 0;
 	float posy= 0;

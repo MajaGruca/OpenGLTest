@@ -256,32 +256,12 @@ void aktywujSpecjalneRenderowanieModelu(char * file_name, int spec_id = 0)
 
 void ladujModele()
 {
-//
-//    WIN32_FIND_DATA *fd;
-//    HANDLE fh;
     model3DS * model_tmp;
-//    char directory[_MAX_PATH];
-//    if( getcwd( directory, _MAX_PATH ) == NULL ) return;
-//    strcat (directory,"\\data\\*.3ds");
-//
-//    fd = (WIN32_FIND_DATA *)malloc(sizeof(WIN32_FIND_DATA));
-//    fh = FindFirstFile((LPCSTR) directory,fd);
-//    if(fh != INVALID_HANDLE_VALUE)
-//        do {
-//            if(fd->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY){	// katalogi ignorujemy
-//                if (FindNextFile(fh,fd)) continue; else break;
-//            }
-//            // ladowanie obiektu i dodanie do kontenera
-//            char filename[_MAX_PATH];
-//            strcpy (filename,"data\\");
-//            strcat (filename,fd->cFileName);
-            char filename[300];
-            char name[30];
-            strcpy(filename, "/home/olga/Documents/OpenGLTest/skilift.3ds");
-            model_tmp = new model3DS(filename,1,stereoTryb == 2);
-            dodajModel(model_tmp, strcpy(name, "skilift"));
-//            printf("[3DS] Model '%s' stored\n",fd->cFileName);
-//        } while(FindNextFile(fh,fd));
+    char filename[300];
+    char name[30];
+    strcpy(filename, "../tekstury/skilift5.3ds");
+    model_tmp = new model3DS(filename,1,stereoTryb == 2);
+    dodajModel(model_tmp, strcpy(name, "skilift"));
 }
 
 /**********************************************************
@@ -428,8 +408,8 @@ int main(int argc, char **argv)
         glutTimerFunc(10,syncTimer,10);
     resetKamery();
     //srand( (unsigned)time( NULL ) ); // generator liczb losowych
-    //ladujModele();
-    //aktywujSpecjalneRenderowanieModelu("woda",1);
+    ladujModele();
+//    aktywujSpecjalneRenderowanieModelu("skilift",1);
     //aktywujSpecjalneRenderowanieModelu("most",2);
     ter->getHeightArrayFromFile("../c.csv");
     if (oknoFullScreen && stereoTryb != 2) glutFullScreen();
@@ -438,9 +418,10 @@ int main(int argc, char **argv)
     glEnable(GL_TEXTURE_2D);
     const char *path = "../tekstury/RubikTileBlue.bmp";
     const char *path2 = "../tekstury/Snow.bmp";
+    const char *path3 = "../tekstury/ski_lift.bmp";
     tex_blue = WczytajTeksture(path);
     snow_texture = WczytajTeksture(path2);
-
+    skilift_texture = WczytajTeksture(path3);
     if(tex_blue == -1 || snow_texture == -1) {
         std::cout << "Błąd wczytywania ";
         exit(0);
