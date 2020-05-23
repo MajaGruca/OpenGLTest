@@ -158,7 +158,6 @@ void windowInit()
     glEnable(GL_LIGHTING);
     GLfloat  ambient[4] = {0.3,0.3,0.3,1};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT,ambient);
-
     GLfloat  diffuse[4] = {0.9,0.9,0.9,1};
     GLfloat  specular[4] = {0.9,0.9,0.9,1};
     GLfloat	 position[4] = {30,30,-30,1};
@@ -170,13 +169,6 @@ void windowInit()
 
     /*******************MGLA**************************/
 
-    float fogColor[4]= {0.8f, 0.8f, 0.8f, 0.1f};
-    glFogi(GL_FOG_MODE,GL_EXP2); // [GL_EXP, GL_EXP2, GL_LINEAR ]
-    glFogfv(GL_FOG_COLOR, fogColor);
-    glFogf(GL_FOG_DENSITY, 0.005f);
-    glFogf(GL_FOG_START, 20.0f);
-    glFogf(GL_FOG_END, 200.0f);
-    glEnable(GL_FOG);
 }
 
 void rozmiar (int width, int height)
