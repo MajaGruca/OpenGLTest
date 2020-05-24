@@ -5,6 +5,7 @@
 */
 
 #include "model3DS.h"
+#include "tekstura.h"
 #include <GL/glut.h>
 //#include "glut.h"
 
@@ -355,8 +356,8 @@ void material3DS::loadTexture(std::string filename, int chunkType, bool stereoMo
         return;
     }
 
-    GLuint newTextureId;
-    glGenTextures(1, &newTextureId);
+    GLuint newTextureId = num_texture+1;
+    //glGenTextures(1, &newTextureId);
 
     if(filename.find(".bmp") != std::string::npos){
         textureBMP newTexture(filename, newTextureId, stereoMode);

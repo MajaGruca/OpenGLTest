@@ -11,7 +11,7 @@
 #include <cstring>
 
 typedef unsigned char byte;
-int num_texture=-1;
+int num_texture=0;
 
 int WczytajTeksture (const char *filename)
 {

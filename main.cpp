@@ -257,11 +257,18 @@ void aktywujSpecjalneRenderowanieModelu(char * file_name, int spec_id = 0)
 void ladujModele()
 {
     model3DS * model_tmp;
+    char name[30] = "tekstury/skilift5.3ds";
     char filename[300];
-    char name[30];
-    strcpy(filename, "/home/olga/Documents/OpenGLTest/skilift5.3ds");
+    char directory_full[_MAX_PATH];
+    if( getcwd( directory_full, _MAX_PATH ) == NULL ) return;
+    char directory[strlen(directory_full)-17+strlen(name)];
+    strcpy(directory,directory_full);
+    directory[strlen(directory_full)-17] = '\0';
+    strcat(directory, name);
+    strcpy(filename, directory);
     model_tmp = new model3DS(filename,1,stereoTryb == 2);
     dodajModel(model_tmp, strcpy(name, "skilift"));
+    printf("[3DS] Model '%s' stored\n", filename);
 }
 
 /**********************************************************
@@ -409,20 +416,20 @@ int main(int argc, char **argv)
     resetKamery();
     //srand( (unsigned)time( NULL ) ); // generator liczb losowych
     ladujModele();
-//    aktywujSpecjalneRenderowanieModelu("skilift",1);
+    //aktywujSpecjalneRenderowanieModelu("skilift",1);
     //aktywujSpecjalneRenderowanieModelu("most",2);
     ter->getHeightArrayFromFile("../c.csv");
     if (oknoFullScreen && stereoTryb != 2) glutFullScreen();
 
     //ładowanie tekstur
     glEnable(GL_TEXTURE_2D);
-    const char *path = "../tekstury/RubikTileBlue.bmp";
+    // char *path = "../tekstury/RubikTileBlue.bmp";
     const char *path2 = "../tekstury/Snow.bmp";
-    const char *path3 = "../tekstury/ski_lift.bmp";
-    tex_blue = WczytajTeksture(path);
+    //const char *path3 = "../tekstury/ski_lift.bmp";
+    //tex_blue = WczytajTeksture(path);
     snow_texture = WczytajTeksture(path2);
-    skilift_texture = WczytajTeksture(path3);
-    if(tex_blue == -1 || snow_texture == -1) {
+    //skilift_texture = WczytajTeksture(path3);
+    if(tex_blue == 0 || snow_texture == 0) {
         std::cout << "Błąd wczytywania ";
         exit(0);
     }

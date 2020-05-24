@@ -3,16 +3,17 @@ glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 glMatrixMode(GL_MODELVIEW);
 glBindTexture(GL_TEXTURE_2D, snow_texture);
 ter->GenerateTerrain();
+glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 glPushMatrix();
         glEnable(GL_BLEND);
         glDepthMask(GL_FALSE);
-        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
-        glBindTexture(GL_TEXTURE_2D, skilift_texture);
-        glMateriali(GL_FRONT, GL_EMISSION,(0,0,0,1));
+        //glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+        //glBindTexture(GL_TEXTURE_2D, skilift_texture);
+        //glMateriali(GL_FRONT, GL_EMISSION,(0,0,0,1));
         glTranslatef(105,-6.7,-103);
         rysujModel ("skilift");
-        glDepthMask(GL_TRUE);
-        glDisable(GL_BLEND);
+        //glDepthMask(GL_TRUE);
+        //glDisable(GL_BLEND);
     glPopMatrix();
 
 /*

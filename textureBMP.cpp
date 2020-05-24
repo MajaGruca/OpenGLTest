@@ -9,14 +9,16 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 #include "textureBMP.h"
+#include "tekstura.h"
 
 textureBMP::textureBMP(const char *filename, const int textureId, const bool stereoMode){
+    /*
     byte *fileData;
     BITMAPFILEHEADER fileHeader;
     BITMAPINFOHEADER infoHeader;
 
     // Open file
-    HANDLE hTextureFile = open(filename, O_RDONLY | O_SYNC);//CreateFile(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    HANDLE hTextureFile = open(filename, O_RDONLY);//CreateFile(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
     if(hTextureFile == INVALID_HANDLE_VALUE){
         std::cout<<"[BMP] ERROR: Could not open '"<<filename<<"'"<<std::endl;
@@ -42,7 +44,7 @@ textureBMP::textureBMP(const char *filename, const int textureId, const bool ste
         return;
     }
     fileData = (byte*)MapViewOfFile(hTextureFileMapping, FILE_MAP_READ, 0, 0, 0);
-    */
+
     // Read BMP header
     memcpy(&fileHeader, fileData, sizeof(fileHeader));
     memcpy(&infoHeader, fileData+sizeof(fileHeader), sizeof(infoHeader));
@@ -115,7 +117,8 @@ textureBMP::textureBMP(const char *filename, const int textureId, const bool ste
     // Texture's uploaded, don't need data any more
     munmap(fileData, sizeof(fileHeader));
     //CloseHandle(hTextureFileMapping);
-    close(hTextureFile);
+    close(hTextureFile);*/
+    WczytajTeksture(filename);
 
     std::cout<<"[BMP] Texture '"<<filename<<"' loaded"<<std::endl;
 }

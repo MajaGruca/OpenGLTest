@@ -33,9 +33,9 @@ void Terrain::GenerateTerrain() {
             double y = this->getHeightOfPoint(n, h);
             glTexCoord2f(x1, 0);
             glVertex3f((float) n, (float) y, (float) h);
-            std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h << "\n";
+            //std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h << "\n";
             y = (float) this->getHeightOfPoint(n, h+1);
-            std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h + 1 << "\n";
+            //std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h + 1 << "\n";
             glTexCoord2f(x1, 1);
             if(x1==0)
                 x1=1;
