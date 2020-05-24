@@ -259,7 +259,7 @@ void ladujModele()
     model3DS * model_tmp;
     char filename[300];
     char name[30];
-    strcpy(filename, "../tekstury/skilift5.3ds");
+    strcpy(filename, "/home/olga/Documents/OpenGLTest/skilift5.3ds");
     model_tmp = new model3DS(filename,1,stereoTryb == 2);
     dodajModel(model_tmp, strcpy(name, "skilift"));
 }
