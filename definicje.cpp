@@ -8,7 +8,7 @@
 #include "Terrain.h"
 
 
-Terrain *ter = new Terrain(13, 6, 2);
+Terrain *ter = new Terrain(23, 6, 2);
 
 	/******************* SZABLON **************************/
 

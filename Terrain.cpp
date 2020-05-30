@@ -11,6 +11,8 @@
 #include <vector>
 #include <sstream>
 #include <random>
+#include <tuple>
+#include <iomanip>
 
 using namespace std;
 
@@ -33,9 +35,9 @@ void Terrain::GenerateTerrain() {
             double y = this->getHeightOfPoint(n, h);
             glTexCoord2f(x1, 0);
             glVertex3f((float) n, (float) y, (float) h);
-            std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h << "\n";
+//            std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h << "\n";
             y = (float) this->getHeightOfPoint(n, h+1);
-            std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h + 1 << "\n";
+//            std::cout << "Vert: " << (float) n << " " << (float) y << " " << (float) h + 1 << "\n";
             glTexCoord2f(x1, 1);
             if(x1==0)
                 x1=1;
@@ -53,7 +55,36 @@ double Terrain::getHeightOfPoint(int x, int y) {
     return this->ary[x][y];
 }
 
+tuple<double,double,double> Terrain::getPlaceForSkilift() {
+    double x = this->rows-3;
+    double z = this->columns/2;
+    double y = this->getHeightOfPoint(int(x),int(z));
+    return std::make_tuple(x,y,z);
+}
 
+tuple<double,double,double> Terrain::getPlaceForUpperSkiLift() {
+    double x = 3.0;
+    double z = this->columns/2;
+    double y = this->getHeightOfPoint(int(x),int(z));
+    return std::make_tuple(x,y,z);
+}
+
+void Terrain::getDistanceBetweenSkiLifts() {
+    tuple<double,double,double> upper = this->getPlaceForUpperSkiLift();
+    tuple<double,double,double> down = this->getPlaceForSkilift();
+    double x1 = get<0>(upper);
+    double y1 = get<1>(upper);
+    double z1 = get<2>(upper);
+    double x2 = get<0>(down);
+    double y2 = get<1>(down);
+    double z2 = get<2>(down);
+    double d = sqrt(pow(x2 - x1, 2) +
+                   pow(y2 - y1, 2) +
+                   pow(z2 - z1, 2) * 1.0);
+    std::cout << std::fixed;
+    std::cout << std::setprecision(2);
+    cout << " Distance is " << d;
+}
 void Terrain::getHeightArrayFromFile(std::string nameOfFile) {
     std::ifstream csv(nameOfFile);
     std::string line;
@@ -120,3 +151,4 @@ void Terrain::randomizeHeights() {
     this->columns = (this->columns*6)+1;
     this->rows = (this->rows-1)*5+2;
 }
+

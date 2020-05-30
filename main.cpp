@@ -259,7 +259,7 @@ void ladujModele()
     model3DS * model_tmp;
     char filename[300];
     char name[30];
-    strcpy(filename, "/home/olga/Documents/OpenGLTest/skilift5.3ds");
+    strcpy(filename, "/home/olga/Documents/OpenGLTest/sl.3ds");
     model_tmp = new model3DS(filename,1,stereoTryb == 2);
     dodajModel(model_tmp, strcpy(name, "skilift"));
 }
@@ -411,14 +411,14 @@ int main(int argc, char **argv)
     ladujModele();
 //    aktywujSpecjalneRenderowanieModelu("skilift",1);
     //aktywujSpecjalneRenderowanieModelu("most",2);
-    ter->getHeightArrayFromFile("../c.csv");
+    ter->getHeightArrayFromFile("../a.csv");
     if (oknoFullScreen && stereoTryb != 2) glutFullScreen();
 
     //ładowanie tekstur
     glEnable(GL_TEXTURE_2D);
     const char *path = "../tekstury/RubikTileBlue.bmp";
     const char *path2 = "../tekstury/Snow.bmp";
-    const char *path3 = "../tekstury/ski_lift.bmp";
+    const char *path3 = "../tekstury/wyciag.bmp";
     tex_blue = WczytajTeksture(path);
     snow_texture = WczytajTeksture(path2);
     skilift_texture = WczytajTeksture(path3);

@@ -6,15 +6,45 @@ ter->GenerateTerrain();
 glPushMatrix();
         glEnable(GL_BLEND);
         glDepthMask(GL_FALSE);
-        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
-        glBindTexture(GL_TEXTURE_2D, skilift_texture);
+        auto vars = ter->getPlaceForSkilift();
+        glTranslatef(std::get<0>(vars), std::get<1>(vars), std::get<2>(vars));
+        glScalef(0.1,0.1,0.1);
+        glRotatef(270,0,1,0);
+//        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+//        glBindTexture(GL_TEXTURE_2D, skilift_texture);
         glMateriali(GL_FRONT, GL_EMISSION,(0,0,0,1));
-        glTranslatef(105,-6.7,-103);
         rysujModel ("skilift");
         glDepthMask(GL_TRUE);
         glDisable(GL_BLEND);
     glPopMatrix();
 
+
+    glPushMatrix();
+        glEnable(GL_BLEND);
+        glDepthMask(GL_FALSE);
+        auto vars_up = ter->getPlaceForUpperSkiLift();
+        glTranslatef(std::get<0>(vars_up), std::get<1>(vars_up)+0.7, std::get<2>(vars_up));
+        glScalef(0.1,0.1,0.1);
+        glRotatef(90,0,1,0);
+        ter->getDistanceBetweenSkiLifts();
+//        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+//        glBindTexture(GL_TEXTURE_2D, skilift_texture);
+        glMateriali(GL_FRONT, GL_EMISSION,(0,0,0,1));
+        rysujModel ("skilift");
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
+    glPopMatrix();
+
+    glPushMatrix();
+        glEnable(GL_BLEND);
+        glDepthMask(GL_FALSE);
+        glBegin (GL_LINES);
+        glVertex3f (std::get<0>(vars_up), std::get<1>(vars_up)+0.7, std::get<2>(vars_up));
+        glVertex3f (std::get<0>(vars), std::get<1>(vars), std::get<2>(vars));
+        glEnd();
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
+    glPopMatrix();
 /*
 
 

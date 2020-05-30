@@ -28,6 +28,11 @@ public:
 //            {1,2,1}
 //    };
     void randomizeHeights();
+
+    std::tuple<double, double, double> getPlaceForSkilift();
+    std::tuple<double, double, double> getPlaceForUpperSkiLift();
+
+    void getDistanceBetweenSkiLifts();
 };
 
 
