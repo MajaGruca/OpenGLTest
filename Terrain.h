@@ -31,8 +31,7 @@ public:
 
     std::tuple<double, double, double> getPlaceForSkilift();
     std::tuple<double, double, double> getPlaceForUpperSkiLift();
-
-    void getDistanceBetweenSkiLifts();
+    std::vector<std::tuple<double,double,double>> drawPoles(double x1, double y1, double z1, double x2, double y2, double z2);
 };
 
 

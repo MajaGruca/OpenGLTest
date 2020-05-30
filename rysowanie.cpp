@@ -23,10 +23,9 @@ glPushMatrix();
         glEnable(GL_BLEND);
         glDepthMask(GL_FALSE);
         auto vars_up = ter->getPlaceForUpperSkiLift();
-        glTranslatef(std::get<0>(vars_up), std::get<1>(vars_up)+0.7, std::get<2>(vars_up));
+        glTranslatef(std::get<0>(vars_up), std::get<1>(vars_up), std::get<2>(vars_up));
         glScalef(0.1,0.1,0.1);
         glRotatef(90,0,1,0);
-        ter->getDistanceBetweenSkiLifts();
 //        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
 //        glBindTexture(GL_TEXTURE_2D, skilift_texture);
         glMateriali(GL_FRONT, GL_EMISSION,(0,0,0,1));
@@ -35,34 +34,108 @@ glPushMatrix();
         glDisable(GL_BLEND);
     glPopMatrix();
 
+
+    glPushMatrix();
+        glEnable(GL_BLEND);
+        glDepthMask(GL_FALSE);
+        double xDiff = double(int(std::get<0>(vars)/10));
+        double poleX = std::get<0>(vars_up)+xDiff;
+        double poleZ = std::get<2>(vars_up);
+        double poleY = ter->getHeightOfPoint(int(poleX), int(poleZ));
+        std::cout<<"Pole x "<<poleX<<" Pole y "<<poleY<<" Pole z "<<poleZ<<"\n";
+        glTranslatef(poleX, poleY, poleZ);
+        glScalef(0.3,0.3,0.3);
+        glRotatef(90,0,1,0);
+//        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+//        glBindTexture(GL_TEXTURE_2D, skilift_texture);
+        glMateriali(GL_FRONT, GL_EMISSION,(0,0,0,1));
+        rysujModel ("skipole");
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
+    glPopMatrix();
+
+        glPushMatrix();
+        glEnable(GL_BLEND);
+        glDepthMask(GL_FALSE);
+        double pole2X = std::get<0>(vars)-xDiff;
+        double pole2Z = std::get<2>(vars);
+        double pole2Y = ter->getHeightOfPoint(int(pole2X), int(pole2Z));
+        std::cout<<"Pole x "<<pole2X<<" Pole y "<<pole2Y<<" Pole z "<<pole2Z<<"\n";
+        glTranslatef(pole2X, pole2Y, pole2Z);
+        glScalef(0.3,0.3,0.3);
+        glRotatef(90,0,1,0);
+//        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+//        glBindTexture(GL_TEXTURE_2D, skilift_texture);
+        glMateriali(GL_FRONT, GL_EMISSION,(0,0,0,1));
+        rysujModel ("skipole");
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
+    glPopMatrix();
+
+
+
+    std::vector< std::tuple<double,double,double> > tuple_list = ter->drawPoles(poleX, poleY, poleZ, pole2X, pole2Y, pole2Z);
+
+    glEnable(GL_BLEND);
+    glDepthMask(GL_FALSE);
+        for(auto const& value: tuple_list) {
+            glPushMatrix();
+            glTranslatef(std::get<0>(value), std::get<1>(value), std::get<2>(value));
+            glScalef(0.3,0.3,0.3);
+            glRotatef(90,0,1,0);
+            rysujModel ("skipole");
+            glPopMatrix();
+            }
+    glDepthMask(GL_TRUE);
+    glDisable(GL_BLEND);
+
     glPushMatrix();
         glEnable(GL_BLEND);
         glDepthMask(GL_FALSE);
         glBegin (GL_LINES);
-        glVertex3f (std::get<0>(vars_up), std::get<1>(vars_up)+0.7, std::get<2>(vars_up));
-        glVertex3f (std::get<0>(vars), std::get<1>(vars), std::get<2>(vars));
+        glVertex3f (std::get<0>(vars_up), std::get<1>(vars_up)+0.4, std::get<2>(vars_up));
+        glVertex3f (poleX, poleY+1.6, poleZ-0.2);
+        glVertex3f (poleX, poleY+1.6, poleZ-0.2);
+        for(auto const& value: tuple_list) {
+            glVertex3f (std::get<0>(value), std::get<1>(value)+1.6, std::get<2>(value)-0.2);
+            glVertex3f (std::get<0>(value), std::get<1>(value)+1.6, std::get<2>(value)-0.2);
+        }
+        glVertex3f (pole2X-0.2, pole2Y+1.6, pole2Z-0.2);
+        glVertex3f (pole2X-0.2, pole2Y+1.6, pole2Z-0.2);
+        glVertex3f (std::get<0>(vars)-1.5, std::get<1>(vars)+0.4, std::get<2>(vars)-0.4);
+        glEnd();
+        glBegin (GL_LINES);
+        glVertex3f (std::get<0>(vars_up)+0.2, std::get<1>(vars_up)+0.4, std::get<2>(vars_up)+0.2);
+        glVertex3f (poleX+0.2, poleY+1.6, poleZ+0.2);
+        glVertex3f (poleX+0.2, poleY+1.6, poleZ+0.2);
+        for(auto const& value: tuple_list) {
+            glVertex3f (std::get<0>(value), std::get<1>(value)+1.6, std::get<2>(value)+0.2);
+            glVertex3f (std::get<0>(value), std::get<1>(value)+1.6, std::get<2>(value)+0.2);
+        }
+        glVertex3f (pole2X, pole2Y+1.6, pole2Z+0.2);
+        glVertex3f (pole2X, pole2Y+1.6, pole2Z+0.2);
+        glVertex3f (std::get<0>(vars)-1.5, std::get<1>(vars)+0.4, std::get<2>(vars)+0.4);
         glEnd();
         glDepthMask(GL_TRUE);
         glDisable(GL_BLEND);
     glPopMatrix();
-/*
 
-
-    glBegin(GL_QUADS);
-    int texTiles = 3;   // zmiana wartości 3 na inną sprawia że tekstura jest bardziej lub mniej rozciągnięta
-	glTexCoord2f(texTiles, texTiles);
-	glVertex3f(10.0f, 10.0f, 10.0f);
-	glTexCoord2f(0, texTiles);
-	glVertex3f(-10.0f, 10.0f, 10.0f);
-	glTexCoord2f(0, 0);
-	glVertex3f(-10.0f, -10.0f, 10.0f);
-	glTexCoord2f(texTiles, 0);
-	glVertex3f(10.0f, -10.0f, 10.0f);
-
-	glEnd();
-
-	glBindTexture(GL_TEXTURE_2D, tex_blue);
-*/
+//*/
+//    glBegin(GL_QUADS);
+//    int texTiles = 3;   // zmiana wartości 3 na inną sprawia że tekstura jest bardziej lub mniej rozciągnięta
+//	glTexCoord2f(texTiles, texTiles);
+//	glVertex3f(10.0f, 10.0f, 10.0f);
+//	glTexCoord2f(0, texTiles);
+//	glVertex3f(-10.0f, 10.0f, 10.0f);
+//	glTexCoord2f(0, 0);
+//	glVertex3f(-10.0f, -10.0f, 10.0f);
+//	glTexCoord2f(texTiles, 0);
+//	glVertex3f(10.0f, -10.0f, 10.0f);
+//
+//	glEnd();
+//
+//	glBindTexture(GL_TEXTURE_2D, tex_blue);
+//*/
 /******************* SZABLON **************************/
 //glPushMatrix();
 //    glBegin(GL_TRIANGLE_STRIP);

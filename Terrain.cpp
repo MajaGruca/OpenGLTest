@@ -69,22 +69,21 @@ tuple<double,double,double> Terrain::getPlaceForUpperSkiLift() {
     return std::make_tuple(x,y,z);
 }
 
-void Terrain::getDistanceBetweenSkiLifts() {
-    tuple<double,double,double> upper = this->getPlaceForUpperSkiLift();
-    tuple<double,double,double> down = this->getPlaceForSkilift();
-    double x1 = get<0>(upper);
-    double y1 = get<1>(upper);
-    double z1 = get<2>(upper);
-    double x2 = get<0>(down);
-    double y2 = get<1>(down);
-    double z2 = get<2>(down);
-    double d = sqrt(pow(x2 - x1, 2) +
-                   pow(y2 - y1, 2) +
-                   pow(z2 - z1, 2) * 1.0);
-    std::cout << std::fixed;
-    std::cout << std::setprecision(2);
-    cout << " Distance is " << d;
+std::vector<std::tuple<double,double,double>> Terrain::drawPoles(double x1, double y1, double z1, double x2, double y2, double z2) {
+    double distanceBetweenPools = x2 - x1;
+    int nPoles = int(distanceBetweenPools)/16;
+    double poleNX = x1;
+    double polesDistance = distanceBetweenPools/nPoles;
+    std::vector< std::tuple<double,double,double> > tuple_list;
+    for (int i=0; i<nPoles; i++) {
+        poleNX = poleNX + polesDistance;
+        double poleNY = this->getHeightOfPoint(int(poleNX), int(z2));
+        tuple_list.push_back(std::tuple<double,double,double>(poleNX, poleNY, z2));
+    }
+    return tuple_list;
 }
+
+
 void Terrain::getHeightArrayFromFile(std::string nameOfFile) {
     std::ifstream csv(nameOfFile);
     std::string line;
