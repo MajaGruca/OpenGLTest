@@ -421,10 +421,8 @@ int main(int argc, char **argv)
     glEnable(GL_TEXTURE_2D);
     const char *path = "../tekstury/RubikTileBlue.bmp";
     const char *path2 = "../tekstury/Snow.bmp";
-    const char *path3 = "../tekstury/wyciag.bmp";
     tex_blue = WczytajTeksture(path);
     snow_texture = WczytajTeksture(path2);
-    skilift_texture = WczytajTeksture(path3);
     if(tex_blue == -1 || snow_texture == -1) {
         std::cout << "Błąd wczytywania ";
         exit(0);

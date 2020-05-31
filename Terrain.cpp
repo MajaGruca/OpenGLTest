@@ -71,7 +71,7 @@ tuple<double,double,double> Terrain::getPlaceForUpperSkiLift() {
 
 std::vector<std::tuple<double,double,double>> Terrain::drawPoles(double x1, double y1, double z1, double x2, double y2, double z2) {
     double distanceBetweenPools = x2 - x1;
-    int nPoles = int(distanceBetweenPools)/16;
+    int nPoles = int(distanceBetweenPools)/10;
     double poleNX = x1;
     double polesDistance = distanceBetweenPools/nPoles;
     std::vector< std::tuple<double,double,double> > tuple_list;
