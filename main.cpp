@@ -265,6 +265,9 @@ void ladujModele()
     strcpy(filename, "/home/olga/Documents/OpenGLTest/skipole.3ds");
     model_tmp = new model3DS(filename,1,stereoTryb == 2);
     dodajModel(model_tmp, strcpy(name, "skipole"));
+    strcpy(filename, "/home/olga/Documents/OpenGLTest/chair.3ds");
+    model_tmp = new model3DS(filename,1,stereoTryb == 2);
+    dodajModel(model_tmp, strcpy(name, "chair"));
 }
 
 /**********************************************************

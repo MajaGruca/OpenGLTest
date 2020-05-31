@@ -32,6 +32,11 @@ public:
     std::tuple<double, double, double> getPlaceForSkilift();
     std::tuple<double, double, double> getPlaceForUpperSkiLift();
     std::vector<std::tuple<double,double,double>> drawPoles(double x1, double y1, double z1, double x2, double y2, double z2);
+
+    std::tuple<double, double, double> getChairPlace(double x1, double y1, double z1, double x2, double y2, double z2);
+
+    std::tuple<double, double, double>
+    getChairPlace(double x1, double y1, double z1, double x2, double y2, double z2, double nx);
 };
 
 

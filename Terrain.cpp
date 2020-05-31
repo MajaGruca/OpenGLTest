@@ -81,6 +81,46 @@ std::vector<std::tuple<double,double,double>> Terrain::drawPoles(double x1, doub
     }
     return tuple_list;
 }
+double slope(const vector<double>& x, const vector<double>& y){
+    size_t n = x.size();
+
+    double avgX = accumulate(x.begin(), x.end(), 0.0) / n;
+    double avgY = accumulate(y.begin(), y.end(), 0.0) / n;
+
+    double numerator = 0.0;
+    double denominator = 0.0;
+
+    for(size_t i=0; i<n; ++i){
+        numerator += (x[i] - avgX) * (y[i] - avgY);
+        denominator += (x[i] - avgX) * (x[i] - avgX);
+    }
+
+    return numerator / denominator;
+}
+std::tuple<double,double,double> Terrain::getChairPlace(double x1, double y1, double z1, double x2, double y2, double z2, double nx) {
+//    double a=y1-y2;
+//    double b= x2-x1;
+//    double c = (x1-x2)*y1 + (y2-y1)*x1;
+//    double y = (-(c+a*nx))/b;
+    double a=(y2-y1)/(x2-x1);
+    double b= y1-a*x1;
+    double y = a*nx+b;
+    return std::tuple<double,double,double>{nx,y,z1};
+
+
+
+    //    double distanceBetweenPools = x2 - x1;
+//    int nPoles = int(distanceBetweenPools)/10;
+//    double poleNX = x1;
+//    double polesDistance = distanceBetweenPools/nPoles;
+//    std::vector< std::tuple<double,double,double> > tuple_list;
+//    for (int i=0; i<nPoles; i++) {
+//        poleNX = poleNX + polesDistance;
+//        double poleNY = this->getHeightOfPoint(int(poleNX), int(z2));
+//        tuple_list.push_back(std::tuple<double,double,double>(poleNX, poleNY, z2));
+//    }
+//    return tuple_list;
+}
 
 
 void Terrain::getHeightArrayFromFile(std::string nameOfFile) {

@@ -5,6 +5,7 @@ glBindTexture(GL_TEXTURE_2D, snow_texture);
 ter->GenerateTerrain();
 
 glDisable(GL_TEXTURE_2D);
+
 glPushMatrix();
         auto vars = ter->getPlaceForSkilift();
         glTranslatef(std::get<0>(vars), std::get<1>(vars), std::get<2>(vars));
@@ -85,6 +86,37 @@ glPushMatrix();
         glVertex3f (std::get<0>(vars)-1.5, std::get<1>(vars)+0.4, std::get<2>(vars)+0.4);
         glEnd();
     glPopMatrix();
+
+
+    std::tuple<double,double,double> result;
+    std::reverse(tuple_list.begin(), tuple_list.end()) ;
+    double prevX = pole2X;
+    double prevY = pole2Y+1.6;
+    double prevZ = pole2Z-0.2;
+    int el = 0;
+    for(auto const& value: tuple_list) {
+        if (el>0){
+        double X = std::get<0>(value);
+        double Y = std::get<1>(value)+1.6;
+        double Z = std::get<2>(value)-0.2;
+        double XDdiff = abs(prevX-X)/5;
+        for (int z=0; z<5; z++) {
+            result = ter->getChairPlace(prevX, prevY, prevZ, X, Y, Z, prevX-XDdiff*z);
+            glPushMatrix();
+            glTranslatef(std::get<0>(result), std::get<1>(result)-0.67, std::get<2>(result)+0.43);
+            glScalef(0.3,0.3,0.3);
+            glRotatef(90,0,1,0);
+            rysujModel ("chair");
+            glPopMatrix();
+        }
+        prevX = X;
+        prevY = Y;
+        prevZ = Z;
+        };
+        el++;
+
+    }
+
 glEnable(GL_TEXTURE_2D);
 //*/
 //    glBegin(GL_QUADS);
