@@ -28,7 +28,6 @@ void Terrain::GenerateTerrain() {
     for (int h=0; h<this->columns; h++) {
         glPushMatrix();
         glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
-        glColor3f(0.0f, 1.0f, 0.0f);
         glBegin(GL_TRIANGLE_STRIP);
         int n =0;
         for (int w=0; w<this->rows*2; w=w+2) {

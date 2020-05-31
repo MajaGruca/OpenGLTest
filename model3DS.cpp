@@ -565,36 +565,50 @@ void mesh3DS::draw(int textureID, bool pregenetateList){
                 }
 
                 // Apply material colors
-                if(glIsEnabled(GL_LIGHTING)){
-                    GLfloat matOne[4]={1,1,1,1};
-                    GLfloat matLow[4]={0.20,0.20,0.20,0.20};
-                    GLfloat matDiffuse[4]; // tworzenie diffuseColor z parametrem alfa pochodzacym z opacity
-                    memcpy(matDiffuse,currentMaterial.getDiffuseColor(),sizeof(float)*3);
-                    matDiffuse[3] = 1 - currentMaterial.getOpacity();
-                    if(hasTextureMap){ //replace only color with texture, but keep lighting contribution
-                        glMaterialfv(materialFaces, GL_DIFFUSE, matOne);
-                    }
-                    else glMaterialfv(materialFaces, GL_DIFFUSE, matDiffuse);
-                    glMaterialfv(materialFaces, GL_AMBIENT, matLow);
-                    glMaterialfv(materialFaces, GL_SPECULAR, matLow);
-                    glMaterialf(materialFaces, GL_SHININESS, 2.0f);
-                }
-                else glColor3fv(currentMaterial.getDiffuseColor());
+//                if(glIsEnabled(GL_LIGHTING)){
+//                    GLfloat matOne[4]={1,1,1,1};
+//                    GLfloat matLow[4]={0.20,0.20,0.20,0.20};
+//                    GLfloat matDiffuse[4]; // tworzenie diffuseColor z parametrem alfa pochodzacym z opacity
+//                    memcpy(matDiffuse,currentMaterial.getDiffuseColor(),sizeof(float)*3);
+//                    matDiffuse[3] = 1 - currentMaterial.getOpacity();
+//                    if(hasTextureMap){ //replace only color with texture, but keep lighting contribution
+//                        glMaterialfv(materialFaces, GL_DIFFUSE, matOne);
+//                    }
+//                    else glMaterialfv(materialFaces, GL_DIFFUSE, matDiffuse);
+//                    glMaterialfv(materialFaces, GL_AMBIENT, matLow);
+//                    glMaterialfv(materialFaces, GL_SPECULAR, matLow);
+//                    glMaterialf(materialFaces, GL_SHININESS, 2.0f);
+//                }
+//                glColor3fv(currentMaterial.getDiffuseColor());
+
+
+//                GLfloat light_ambient[]={0.2,0.2,02,1.0};
+//                GLfloat light_diffuse[]={1.0,1.0,1.0,1.0};
+//                GLfloat light_specular[]={1.0,1.0,1.0,1.0};
+//                GLfloat light_position[]={1.0,1.0,1.0,0.0};
+//                glLightfv(GL_LIGHT0,GL_AMBIENT,light_ambient);
+//                glLightfv(GL_LIGHT0,GL_DIFFUSE,light_diffuse);
+//                glLightfv(GL_LIGHT0,GL_SPECULAR,light_specular);
+//                glLightfv(GL_LIGHT0,GL_POSITION,light_position);
+//                glEnable(GL_LIGHT0);
+                GLfloat mat_ambient[]={0.25f, 0.25f, 0.25f, 1.0f};
+                GLfloat mat_diffuse[]={0.1f, 0.1f, 0.1f, 1.0f };
+                GLfloat mat_specular[]={0.774597f, 0.774597f, 0.774597f, 1.0f };
+
+                GLfloat whiteSpecularMaterial[] = {1.0, 1.0, 1.0};
 
                 if (currentMaterial.getOpacity() < 1){
-                    glEnable(GL_BLEND);
-                    glDepthMask(GL_FALSE);
-                    glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+//                    glDepthMask(GL_FALSE);
                     //glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_SRC_ALPHA);
                 }
-
                 std::vector<ushort> *currentMatFaces = &(materialsIter->second);
                 numFaces = (int)currentMatFaces->size(); //number of faces in this material
-
                 switch(m_drawMode){
                     case DRAW_IMMEDIATE_MODE:
-
+                        glClearColor( 1.0, 1.0, 1.0, 1.0 );
+                        glEnable(GL_COLOR_MATERIAL);
                         glBegin(GL_TRIANGLES);
+                        glColor4f(0.113, 0.027, 0.023,1);
                         for(face=0; face<numFaces; face+=3){
                             if(hasTextureMap){
                                 texcoordIndex = (*currentMatFaces)[face]*2;
@@ -619,8 +633,9 @@ void mesh3DS::draw(int textureID, bool pregenetateList){
                             glVertex3f(m_vertices[vertexIndex]+calculateSpecialTransformX(vertexIndex), m_vertices[vertexIndex+1]+calculateSpecialTransformY(vertexIndex), m_vertices[vertexIndex+2]+calculateSpecialTransformZ(vertexIndex));
 
                         }
-                        glEnd();
 
+                        glEnd();
+                        glDisable(GL_COLOR_MATERIAL);
                         break;
 
                     case DRAW_VERTEX_ARRAY:
@@ -654,8 +669,7 @@ void mesh3DS::draw(int textureID, bool pregenetateList){
                         break;
                 } // switch
                 if (currentMaterial.getOpacity() <1){
-                    glDepthMask(GL_TRUE);
-                    glDisable(GL_BLEND);
+//                    glDepthMask(GL_TRUE);
                 }
                 glPopAttrib(); // GL_LIGHTING_BIT
             }
@@ -667,7 +681,6 @@ void mesh3DS::draw(int textureID, bool pregenetateList){
 // - int: id tekstury: je�li wi�ksze od 0 to wymusa automatyczne teksturowanie t� tekstur�, je�li 0 lub brak - przyjmuje teksturowanie z pliku
 // - bool: centrowanie obiektu: je�li true lub brak: za pozycj� obiektu przymuje jego geometryczny �rodek, je�li false - przyjmje wsp�rz�dne z pliku
 void model3DS::draw(int TextureID, bool centruj){
-
     GLboolean texGenS;
     glGetBooleanv(GL_TEXTURE_GEN_S,&texGenS);
     GLboolean texGenT;
