@@ -59,7 +59,8 @@ glPushMatrix();
             rysujModel ("skipole");
             glPopMatrix();
             }
-
+    std::vector< std::tuple<double,double,double> >  resultv;
+    resultv = tuple_list;
     glPushMatrix();
         glBegin (GL_LINES);
         glVertex3f (std::get<0>(vars_up), std::get<1>(vars_up)+0.4, std::get<2>(vars_up));
@@ -76,6 +77,8 @@ glPushMatrix();
         glBegin (GL_LINES);
         glVertex3f (std::get<0>(vars_up)+0.2, std::get<1>(vars_up)+0.4, std::get<2>(vars_up)+0.2);
         glVertex3f (poleX+0.2, poleY+1.6, poleZ+0.2);
+        resultv.insert(resultv.begin(),std::tuple<double,double,double>(poleX, poleY, poleZ));
+        resultv.insert(resultv.begin(),std::tuple<double,double,double>(std::get<0>(vars_up), std::get<1>(vars_up)-1.15, std::get<2>(vars_up)+0.2));
         glVertex3f (poleX+0.2, poleY+1.6, poleZ+0.2);
         for(auto const& value: tuple_list) {
             glVertex3f (std::get<0>(value), std::get<1>(value)+1.6, std::get<2>(value)+0.2);
@@ -86,22 +89,22 @@ glPushMatrix();
         glVertex3f (std::get<0>(vars)-1.5, std::get<1>(vars)+0.4, std::get<2>(vars)+0.4);
         glEnd();
     glPopMatrix();
-
-
+    if (posx >2000) {
+        posx = 0;
+    }
     std::tuple<double,double,double> result;
-    std::reverse(tuple_list.begin(), tuple_list.end()) ;
-    double prevX = pole2X;
-    double prevY = pole2Y+1.6;
-    double prevZ = pole2Z-0.2;
-    int el = 0;
-    for(auto const& value: tuple_list) {
-        if (el>0){
+    std::reverse(resultv.begin(), resultv.end()) ;
+    double prevX = std::get<0>(vars)-1.5;
+    double prevY = std::get<1>(vars)+0.5;
+    double prevZ = std::get<2>(vars)-0.4;
+    for(auto const& value: resultv) {
         double X = std::get<0>(value);
         double Y = std::get<1>(value)+1.6;
         double Z = std::get<2>(value)-0.2;
         double XDdiff = abs(prevX-X)/5;
         for (int z=0; z<5; z++) {
-            result = ter->getChairPlace(prevX, prevY, prevZ, X, Y, Z, prevX-XDdiff*z);
+            result = ter->getChairPlace(prevX, prevY, prevZ, X, Y, Z, prevX-XDdiff*z-XDdiff/2000*posx);
+            posx +=1;
             glPushMatrix();
             glTranslatef(std::get<0>(result), std::get<1>(result)-0.67, std::get<2>(result)+0.43);
             glScalef(0.3,0.3,0.3);
@@ -112,10 +115,38 @@ glPushMatrix();
         prevX = X;
         prevY = Y;
         prevZ = Z;
-        };
-        el++;
-
     }
+
+    std::reverse(resultv.begin(), resultv.end());
+    int el = 0;
+    for(auto const& value: resultv) {
+        if (el == 0) {
+            prevX = std::get<0>(value);
+            prevY = std::get<1>(value)+1.6;
+            prevZ = std::get<2>(value);
+        }
+        else {
+        double X = std::get<0>(value);
+        double Y = std::get<1>(value)+1.6;
+        double Z = std::get<2>(value)-0.2;
+        double XDdiff = abs(prevX-X)/5;
+        for (int z=0; z<5; z++) {
+            result = ter->getChairPlace(prevX, prevY, prevZ, X, Y, Z, prevX+XDdiff*z+XDdiff/2000*posx);
+            posx +=1;
+            glPushMatrix();
+            glTranslatef(std::get<0>(result), std::get<1>(result)-0.67, std::get<2>(result)+0.43);
+            glScalef(0.3,0.3,0.3);
+            glRotatef(-90,0,1,0);
+            rysujModel ("chair");
+            glPopMatrix();
+        }
+        prevX = X;
+        prevY = Y;
+        prevZ = Z;
+        }
+        el += 1;
+        }
+
 
 glEnable(GL_TEXTURE_2D);
 //*/
